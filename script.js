@@ -41,22 +41,24 @@ function removeCardFromStorage() {
 
 function upvote(event) {
   event.preventDefault();
-  var cardId = $(this).closest('.idea-card')[0].id
+  var cardId = $(this).closest('.idea-card')[0].id;
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
-      if (card.quality === "swill") {
-        card.quality = "plausible";
-        $('.' + cardId).text('plausible');
-      } else if (card.quality === "plausible") {
-        card.quality = "genius"
-        $('.' + cardId).text('genius');
-      } else {
-        card.quality = "genius"
-        $('.' + cardId).text('genius');
-      }
+      upVoteText(cardId);
     }
     storeCards();
   })
+};
+
+function upVoteText(cardId) {
+  var card = $('.idea-card').find('span').text();
+  if (card === "swill") {
+    card = "plausible";
+     $('.' + cardId).text('plausible');
+  } else {
+    card = "genius"
+    $('.' + cardId).text('genius');
+  }
 };
 
 function downvote(event) {
