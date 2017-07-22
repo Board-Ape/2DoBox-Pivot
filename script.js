@@ -8,79 +8,94 @@ function CardElements(title, body) {
   this.quality = 'swill';
 };
 
-$(window).on('load', function() {
+$(window).on('load', storageCheck);
+
+function storageCheck() {
   retrieveLocalStorage();
   clearInputs();
-});
+};
 
-$('.title-input, .body-input').keyup(function() {
+$('.title-input, .body-input').on('keyup', enableSave);
+
+function enableSave() {
   if (($('.title-input').val() !== "") || ($('.body-input').val() !== "")) {
     $('.save-btn').removeAttr('disabled');
   }
-});
+};
 
-$('.idea-card-parent').on('click', '#delete', function() {
+$('.idea-card-parent').on('click', '#delete', removeCardFromStorage);
+
+function removeCardFromStorage() {
   var currentCardId = $(this).closest('.idea-card')[0].id
   cardArray.forEach(function(card, index) {
     if (currentCardId == card.id) {
-      cardArray.splice(index, 1)
+      cardArray.splice(index, 1);
     }
   })
-  storeCards()
-  $(this).parents('.idea-card').remove()
-});
+  storeCards();
+  $(this).parents('.idea-card').remove();
+};
 
-$('.idea-card-parent').on('click', '#upvote', function(event) {
+$('.idea-card-parent').on('click', '#upvote', upvote);
+
+function upvote(event) {
   event.preventDefault();
   var cardId = $(this).closest('.idea-card')[0].id
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
       if (card.quality === "swill") {
         card.quality = "plausible";
-        $('.' + cardId).text('plausible')
+        $('.' + cardId).text('plausible');
       } else if (card.quality === "plausible") {
         card.quality = "genius"
-        $('.' + cardId).text('genius')
+        $('.' + cardId).text('genius');
       } else {
         card.quality = "genius"
-        $('.' + cardId).text('genius')
+        $('.' + cardId).text('genius');
       }
     }
     storeCards();
   })
-});
+};
 
-$('.idea-card-parent').on('click', '#downvote', function (event){
+$('.idea-card-parent').on('click', '#downvote', downvote);
+
+function downvote(event) {
   event.preventDefault();
   var cardId = $(this).closest('.idea-card')[0].id
   cardArray.forEach(function (card) {
-  if (card.id == cardId) {
-    if (card.quality === 'genius') {
+    if (card.id == cardId) {
+      if (card.quality === 'genius') {
         card.quality = 'plausible';
-        $('.' + cardId).text('plausible')
+        $('.' + cardId).text('plausible');
       } else if (card.quality === 'plausible') {
         card.quality = 'swill'
-        $('.' + cardId).text('swill')
-      }else{
+        $('.' + cardId).text('swill');
+      } else {
         card.quality = 'swill'
-        $('.' + cardId).text('swill')
+        $('.' + cardId).text('swill');
       }
-  }
+    }
   storeCards();
-})
-});
+  })
+};
 
-$('.save-btn').on('click', function(event) {
+$('.save-btn').on('click', saveClick);
+
+function saveClick(event) {
   event.preventDefault();
   fireCards();
   $('.save-btn').attr('disabled', 'disabled');
-});
+};
 
-cardList.on('keyup', 'h2', function(event) {
-  if (event.keyCode === 13) {
+cardList.on('blur', 'h2', editTitle);
+
+function editTitle(event) {
+  // if (event.keyCode === 13) {
     event.preventDefault();
     this.blur();
-  }
+    console.log("cardlist function")
+  // }
   var id = $(this).closest('.idea-card')[0].id;
   var title = $(this).text();
   cardArray.forEach(function(card) {
@@ -91,11 +106,13 @@ cardList.on('keyup', 'h2', function(event) {
   storeCards();
 });
 
-cardList.on('keyup', '.body-text', function(event) {
-  if (event.keyCode === 13) {
+cardList.on('blur', '.body-text', editBody);
+
+function editBody(event) {
+  // if (event.keyCode === 13) {
     event.preventDefault();
     this.blur();
-  }
+  // }
   var id = $(this).closest('.idea-card')[0].id;
   var body = $(this).text();
   cardArray.forEach(function(card) {
