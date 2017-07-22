@@ -1,5 +1,4 @@
 var cardArray = []
-var cardList = $('.idea-card-parent')
 
 $(window).on('load', storageCheck);
 $('.idea-card-parent').on('click', '#delete', removeCardFromStorage);
@@ -7,12 +6,9 @@ $('.title-input, .body-input').on('keyup', enableSave);
 $('.idea-card-parent').on('click', '#upvote', upvote);
 $('.idea-card-parent').on('click', '#downvote', downvote);
 $('.save-btn').on('click', saveClick);
-cardList.on('blur', 'h2', editCard)
-        .on('blur', '.body-text', editCard);
+$('.idea-card-parent').on('blur', 'h2', editCard)
+                      .on('blur', '.body-text', editCard);
 $('.search-input').on('keyup', searchCards);
-
-
-
 
 function CardElements(title, body) {
   this.title = title;
@@ -21,21 +17,16 @@ function CardElements(title, body) {
   this.quality = 'swill';
 };
 
-
-
 function storageCheck() {
   retrieveLocalStorage();
   clearInputs();
 };
-
 
 function enableSave() {
   if (($('.title-input').val() !== "") || ($('.body-input').val() !== "")) {
     $('.save-btn').removeAttr('disabled');
   }
 };
-
-
 
 function removeCardFromStorage() {
   var currentCardId = $(this).closest('.idea-card')[0].id
@@ -47,7 +38,6 @@ function removeCardFromStorage() {
   storeCards();
   $(this).parents('.idea-card').remove();
 };
-
 
 function upvote(event) {
   event.preventDefault();
@@ -69,7 +59,6 @@ function upvote(event) {
   })
 };
 
-
 function downvote(event) {
   event.preventDefault();
   var cardId = $(this).closest('.idea-card')[0].id
@@ -90,13 +79,11 @@ function downvote(event) {
   })
 };
 
-
 function saveClick(event) {
   event.preventDefault();
   fireCards();
   $('.save-btn').attr('disabled', 'disabled');
 };
-
 
 function editCard() {
   var id = $(this).closest('.idea-card')[0].id;
