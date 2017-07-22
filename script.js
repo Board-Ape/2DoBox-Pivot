@@ -1,6 +1,19 @@
 var cardArray = []
 var cardList = $('.idea-card-parent')
 
+$(window).on('load', storageCheck);
+$('.idea-card-parent').on('click', '#delete', removeCardFromStorage);
+$('.title-input, .body-input').on('keyup', enableSave);
+$('.idea-card-parent').on('click', '#upvote', upvote);
+$('.idea-card-parent').on('click', '#downvote', downvote);
+$('.save-btn').on('click', saveClick);
+cardList.on('blur', 'h2', editTitle);
+cardList.on('blur', '.body-text', editBody);
+$('.search-input').on('keyup', searchCards);
+
+
+
+
 function CardElements(title, body) {
   this.title = title;
   this.body = body;
@@ -8,14 +21,13 @@ function CardElements(title, body) {
   this.quality = 'swill';
 };
 
-$(window).on('load', storageCheck);
+
 
 function storageCheck() {
   retrieveLocalStorage();
   clearInputs();
 };
 
-$('.title-input, .body-input').on('keyup', enableSave);
 
 function enableSave() {
   if (($('.title-input').val() !== "") || ($('.body-input').val() !== "")) {
@@ -23,7 +35,7 @@ function enableSave() {
   }
 };
 
-$('.idea-card-parent').on('click', '#delete', removeCardFromStorage);
+
 
 function removeCardFromStorage() {
   var currentCardId = $(this).closest('.idea-card')[0].id
@@ -36,7 +48,6 @@ function removeCardFromStorage() {
   $(this).parents('.idea-card').remove();
 };
 
-$('.idea-card-parent').on('click', '#upvote', upvote);
 
 function upvote(event) {
   event.preventDefault();
@@ -58,7 +69,6 @@ function upvote(event) {
   })
 };
 
-$('.idea-card-parent').on('click', '#downvote', downvote);
 
 function downvote(event) {
   event.preventDefault();
@@ -80,7 +90,6 @@ function downvote(event) {
   })
 };
 
-$('.save-btn').on('click', saveClick);
 
 function saveClick(event) {
   event.preventDefault();
@@ -88,7 +97,6 @@ function saveClick(event) {
   $('.save-btn').attr('disabled', 'disabled');
 };
 
-cardList.on('blur', 'h2', editTitle);
 
 function editTitle(event) {
   // if (event.keyCode === 13) {
@@ -106,7 +114,6 @@ function editTitle(event) {
   storeCards();
 });
 
-cardList.on('blur', '.body-text', editBody);
 
 function editBody(event) {
   // if (event.keyCode === 13) {
@@ -123,7 +130,6 @@ function editBody(event) {
   storeCards();
 });
 
-$('.search-input').on('keyup', searchCards)
 
 function searchCards() {
   var search = $(this).val().toUpperCase();
