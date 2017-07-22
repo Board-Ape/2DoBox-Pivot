@@ -2,12 +2,13 @@ body {
   font-family: 'open sans', sans-serif;
   font-weight: 400;
 }
-p{
-  line-height: 140%;
-}
+
+/*TOP CONTAINER*/
+
 .top-section {
-  background-color: #E5F3F2;
+  background-color: #fdeee6;
 }
+
 h1 {
   font-family: 'roboto slab', sans-serif;
   font-weight: 700;
@@ -16,12 +17,21 @@ h1 {
   padding-top: .75em;
   margin-bottom: .75em;
 }
+
 .idea {
-  color: #00A79D;
+  color: #f27935;
 }
+
 .box {
   color: #6D6E71;
 }
+
+.search-input,
+.title-input,
+.body-input {
+  border: 4px solid ##d1d3d4;
+}
+
 .title-input,
 .body-input,
 .save-btn,
@@ -33,9 +43,37 @@ h1 {
   height: 3em;
 }
 
-.save-btn{
-  height: 2.5em;
+.input-fields {
+  padding-bottom: .15em;
+}
+
+.title-input:focus,
+.body-input:focus,
+.save-btn:focus,
+.search-input:focus {
+  outline-style: auto;
+  outline-color: #f27935;
+}
+
+.save-btn {
+  background-color: #f27935;
+  color: #fff;
   font-size: 1.25em;
+  border: none;
+  height: 2.5em;
+}
+
+.save-btn:hover {
+  background-color: #D46A2E;
+}
+
+.save-btn:disabled {
+  background-color: #D1D3D4;
+}
+
+.search-section {
+  margin-top: 1.75em;
+  margin-bottom: 1.75em;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -44,18 +82,21 @@ h1 {
   padding-top: .75em;
   font-size: 1.75em;
 }
+
 ::-moz-placeholder { /* Firefox 19+ */
   color: #d1d3d4;
   padding-left: .75em;
   font-size: .5em;
   padding-top: .75em;
 }
+
 :-ms-input-placeholder { /* IE 10+ */
   color: #d1d3d4;
   padding-left: .75em;
   font-size: .5em;
   padding-top: .75em;
 }
+
 :-moz-placeholder { /* Firefox 18- */
   color: #d1d3d4;
   padding-left: .75em;
@@ -63,110 +104,89 @@ h1 {
   padding-top: .75em;
 }
 
-.title-input:focus {
-  outline-style: auto;
-  outline-color: #00A79D;
-}
-.body-input:focus {
-  outline-style: auto;
-  outline-color: #00A79D;
-}
-.save-btn:focus {
-  outline-style: auto;
-  outline-color: #00A79D;
-}
-.search-input:focus {
-  outline-style: auto;
-  outline-color: #00A79D;
-}
-.save-btn {
-  background-color: #00A79D;
-  color: #FFFFFF;
-  font-size: 1em;
-  border: none;
-}
-.save-btn:hover {
-  background-color: #045E55;
-}
+/*CARD CONTAINER*/
 
-.save-btn:disabled {
-  background-color: #D1D3D4;
-}
-.input-fields {
-  padding-bottom: .15em;
-}
-.search-section {
-  margin-top: 1.75em;
-  margin-bottom: 1.75em;
-}
-.search-input,
-.title-input,
-.body-input{
-  border: 4px solid ##d1d3d4;
-}
-h2 {
-  color: #6D6E71;
-}
-.body {
-  text-align: left;
-}
-.body-text{
-  color: #939598
-}
-.quality {
-  color: #6D6E71;
-  margin-left: 1.2em;
-  display: inline-block;
-  font-family: 'roboto slab', sans-serif;
-  letter-spacing: .04em;
-}
 .idea-card {
   width: 66%;
   margin: auto;
 }
+
 h2 {
   font-size: 1.5em;
   font-family: 'roboto slab', sans-serif;
   display: inline-block;
+  color: #6D6E71;
+  margin: .25em 0 1em 0;
 }
-hr {
-  color:#D1D3D4;
-  margin-top: .75em;
+
+p {
+  line-height: 140%;
 }
-.upvote-btn,
-.downvote-btn,
-.quality-div,
-.quality{
-  display: inline-block;
+
+.body {
+  text-align: left;
 }
-.quality-div{
-  margin: 0 0 .25em .75em
+
+.body-text {
+  color: #939598
+  margin: .25em 0 1em 0;
 }
-.delete-btn{
+
+.delete-btn {
   height: 1.5em;
   width: 1.5em;
   float: right;
   display: inline-block;
   background-image: url(ideabox-assets/delete.svg)
 }
+
+.quality-div {
+  margin: 0 0 .25em .75em
+}
+
+.quality {
+  color: #6D6E71;
+  margin-left: 1.2em;
+  display: inline-block;
+  font-family: 'Roboto Slab', sans-serif;
+  letter-spacing: .04em;
+}
+
+.upvote-btn,
+.downvote-btn,
+.quality-div,
+.quality {
+  display: inline-block;
+}
+
+.ratings {
+   display: flex;
+   align-content: center;
+   margin: .25em 0 1em 0;
+ }
+
 #delete,
 #upvote,
 #downvote {
   height: 1.5em;
   width: 1.5em;
 }
+
 #delete:hover {
   background-image: url(ideabox-assets/delete-hover.svg);
 }
+
 #upvote {
     height: 1.5em;
     width: 1.5em;
     display: inline-block;
     background-image: url(ideabox-assets/upvote.svg)
 }
+
 #upvote:hover {
   background-image: url(ideabox-assets/upvote-hover.svg)
 }
+
 #downvote {
   margin-left: .75em;
   height: 1.5em;
@@ -174,24 +194,22 @@ hr {
   display: inline-block;
   background-image: url(ideabox-assets/downvote.svg)
 }
+
 #downvote:hover {
   background-image: url(ideabox-assets/downvote-hover.svg)
 }
 
- .ratings{
-   display: flex;
-   align-content: center;
- }
-h2,
-.ratings,
-.body-text {
-  margin: .25em 0 1em 0;
+hr {
+  color:#D1D3D4;
+  margin-top: .75em;
 }
+
 @media (max-width: 450px) {
-    .body-input{
+  .body-input {
     padding-top: 0;
     padding-bottom: 4em;
   }
+
   .title-input,
   .body-input,
   .save-btn,
