@@ -7,8 +7,8 @@ $('.title-input, .body-input').on('keyup', enableSave);
 $('.idea-card-parent').on('click', '#upvote', upvote);
 $('.idea-card-parent').on('click', '#downvote', downvote);
 $('.save-btn').on('click', saveClick);
-cardList.on('blur', 'h2', editTitle);
-cardList.on('blur', '.body-text', editBody);
+cardList.on('blur', 'h2', editCard)
+        .on('blur', '.body-text', editCard);
 $('.search-input').on('keyup', searchCards);
 
 
@@ -98,38 +98,18 @@ function saveClick(event) {
 };
 
 
-function editTitle(event) {
-  // if (event.keyCode === 13) {
-    event.preventDefault();
-    this.blur();
-    console.log("cardlist function")
-  // }
+function editCard() {
   var id = $(this).closest('.idea-card')[0].id;
-  var title = $(this).text();
+  var title = $('h2').text();
+  var body = $('.body-text').text();
   cardArray.forEach(function(card) {
     if (card.id == id) {
       card.title = title;
-    }
-  })
-  storeCards();
-});
-
-
-function editBody(event) {
-  // if (event.keyCode === 13) {
-    event.preventDefault();
-    this.blur();
-  // }
-  var id = $(this).closest('.idea-card')[0].id;
-  var body = $(this).text();
-  cardArray.forEach(function(card) {
-    if (card.id == id) {
       card.body = body;
     }
   })
   storeCards();
-});
-
+};
 
 function searchCards() {
   var search = $(this).val().toUpperCase();
