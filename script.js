@@ -15,7 +15,7 @@ function CardElements(title, body) {
   this.body = body;
   this.id = Date.now();
   this.indexOfImportance = 2;
-  this.importance = "normal";
+  this.importance = "Normal";
 };
 
 function storageCheck() {
