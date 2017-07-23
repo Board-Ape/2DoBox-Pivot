@@ -121,6 +121,7 @@ h2 {
 
 p {
   line-height: 140%;
+  margin-bottom: 25px;
 }
 
 .body {
@@ -158,7 +159,15 @@ p {
    display: flex;
    align-content: center;
    margin: .25em 0 1em 0;
- }
+}
+
+.completed-task-btn {
+  margin-left: 385px;
+}
+
+.grayout {
+  opacity: 0.4;
+}
 
 #delete,
 #upvote,
