@@ -9,11 +9,13 @@ $('.save-btn').on('click', saveClick);
 $('.to-do-card-parent').on('blur', 'h2', editCard)
                       .on('blur', '.detail-text', editCard);
 $('.search-input').on('keyup', searchCards);
+$('.to-do-card-parent').on('click', '.completed-task-btn', taskComplete);
 
 function CardElements(title, body) {
   this.title = title;
   this.body = body;
   this.id = Date.now();
+  this.completed = false;
   this.indexOfImportance = 2;
   this.importance = ["none", "low", "normal", "high", "critical"];
 };
@@ -109,17 +111,27 @@ function addCards(buildCard) {
   $('.to-do-card-parent').prepend(
     `<article class="to-do-card" id="${buildCard.id}">
       <h2 contenteditable="true">${buildCard.title}</h2>
-      <div class="delete-btn" id="delete">
+      <div class="delete-btn" id="delete"></div>
+        <p class="detail-text" contenteditable="true">${buildCard.body}</p>
       </div>
-      <p class="detail-text" contenteditable="true">${buildCard.body}</p>
       <div class="ratings">
-      <div class="upvote-btn" id="upvote"></div>
-      <div class="downvote-btn" id="downvote"></div>
+        <div class="upvote-btn" id="upvote"></div>
+        <div class="downvote-btn" id="downvote"></div>
         <p class="importance">importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
+        <button class="completed-task-btn">Completed Task</button>
       </div>
       <hr>
     </article>`);
 };
+
+function taskComplete() {
+  console.log("it works")
+  var taskID = $(this).closest('.to-do-card')[0].id;
+  // var parsedIdea = localStorage.setItem('array', JSON.stringify(cardArray));
+  this.completed = true;
+  storeCards();
+  $(this).parent().parent().addClass('grayout');
+}
 
 function fireCards() {
   var newCard = new CardElements($('.task-input').val(), $('.detail-input').val());
