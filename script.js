@@ -15,7 +15,7 @@ function CardElements(title, body) {
   this.body = body;
   this.id = Date.now();
   this.indexOfImportance = 2;
-  this.importance = ["none", "low", "normal", "high", "critical"];
+  this.importance = "normal";
 };
 
 function storageCheck() {
@@ -44,12 +44,18 @@ function upvote() {
   var cardId = $(this).closest('.to-do-card')[0].id
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
-      if (card.importance === "swill") {
-        card.importance = "plausible";
-        $('.' + cardId).text('plausible');
+      if (card.importance === "None") {
+        card.importance = "Low";
+        $('.' + cardId).text("Low");
+      } else if (card.importance === "Low") {
+        card.importance = "Normal";
+        $('.' + cardId).text('Normal');
+      } else if (card.importance === "Normal") {
+        card.importance = "High";
+        $('.' + cardId).text("High");
       } else {
-        card.importance = "genius"
-        $('.' + cardId).text('genius');
+        card.importance = "Critical";
+        $('.' + cardId).text("Critical");
       }
     }
     storeCards();
@@ -58,19 +64,57 @@ function upvote() {
 
 function downvote() {
   var cardId = $(this).closest('.to-do-card')[0].id
-  cardArray.forEach(function (card) {
+  cardArray.forEach(function(card) {
     if (card.id == cardId) {
-      if (card.importance === 'genius') {
-        card.importance = 'plausible';
-        $('.' + cardId).text('plausible');
+      if (card.importance === "Critical") {
+        card.importance = "High";
+        $('.' + cardId).text("High");
+      } else if (card.importance === "High") {
+        card.importance = "Normal";
+        $('.' + cardId).text('Normal');
+      } else if (card.importance === "Normal") {
+        card.importance = "Low";
+        $('.' + cardId).text("Low");
       } else {
-        card.importance = 'swill'
-        $('.' + cardId).text('swill');
+        card.importance = "None";
+        $('.' + cardId).text("None");
       }
     }
-  storeCards();
+    storeCards();
   })
 };
+
+// function upvote() {
+//   var cardId = $(this).closest('.to-do-card')[0].id
+//   cardArray.forEach(function(card) {
+//     if (card.id == cardId) {
+//       if (card.importance === "swill") {
+//         card.importance = "plausible";
+//         $('.' + cardId).text('plausible');
+//       } else {
+//         card.importance = "genius"
+//         $('.' + cardId).text('genius');
+//       }
+//     }
+//     storeCards();
+//   })
+// };
+
+// function downvote() {
+//   var cardId = $(this).closest('.to-do-card')[0].id
+//   cardArray.forEach(function (card) {
+//     if (card.id == cardId) {
+//       if (card.importance === 'genius') {
+//         card.importance = 'plausible';
+//         $('.' + cardId).text('plausible');
+//       } else {
+//         card.importance = 'swill'
+//         $('.' + cardId).text('swill');
+//       }
+//     }
+//   storeCards();
+//   })
+// };
 
 function saveClick(event) {
   event.preventDefault();
@@ -115,7 +159,7 @@ function addCards(buildCard) {
       <div class="ratings">
       <div class="upvote-btn" id="upvote"></div>
       <div class="downvote-btn" id="downvote"></div>
-        <p class="importance">importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
+        <p class="importance">Importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
       </div>
       <hr>
     </article>`);
