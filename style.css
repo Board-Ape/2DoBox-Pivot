@@ -18,7 +18,7 @@ h1 {
   margin-bottom: .75em;
 }
 
-.idea {
+.to-do {
   color: #f27935;
 }
 
@@ -27,13 +27,13 @@ h1 {
 }
 
 .search-input,
-.title-input,
-.body-input {
+.task-input,
+.detail-input {
   border: 4px solid ##d1d3d4;
 }
 
-.title-input,
-.body-input,
+.task-input,
+.detail-input,
 .save-btn,
 .search-input {
   width: 66%;
@@ -47,8 +47,8 @@ h1 {
   padding-bottom: .15em;
 }
 
-.title-input:focus,
-.body-input:focus,
+.task-input:focus,
+.detail-input:focus,
 .save-btn:focus,
 .search-input:focus {
   outline-style: auto;
@@ -106,7 +106,7 @@ h1 {
 
 /*CARD CONTAINER*/
 
-.idea-card {
+.to-do-card {
   width: 66%;
   margin: auto;
 }
@@ -205,13 +205,13 @@ hr {
 }
 
 @media (max-width: 450px) {
-  .body-input {
+  .detail-input {
     padding-top: 0;
     padding-bottom: 4em;
   }
 
-  .title-input,
-  .body-input,
+  .task-input,
+  .detail-input,
   .save-btn,
   .search-input {
     width: 80%;
