@@ -39,17 +39,41 @@ function removeCardFromStorage() {
   $(this).parents('.idea-card').remove();
 };
 
-function upvote(event) {
-  event.preventDefault();
+// This functionality is not working because it doesn't recognize what id is defined as when you split the function even if you have the forEach Loop nested inside both....
+
+// function upvote() {
+//   var cardId = $(this).closest('.idea-card')[0].id
+//   cardArray.forEach(function(card) {
+//     if (card.id == cardId) {
+//       upvoteConditions();
+//     }
+//     storeCards();
+//   })
+// };
+//
+// function upvoteConditions() {
+//   var cardId = $(this).closest('.idea-card')[0].id
+//   cardArray.forEach(function(card) {
+//     if (card.quality === "swill") {
+//       card.quality = "plausible";
+//       $('.' + cardId).text('plausible');
+//     } else {
+//       card.quality = "genius";
+//       $('.' + cardId).text('genius');
+//    }
+//   })
+// };
+
+
+// Functionality is at 100% with this reduced function
+// The trick will be removing the nested if statement without running into the same problems as above
+function upvote() {
   var cardId = $(this).closest('.idea-card')[0].id
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
       if (card.quality === "swill") {
         card.quality = "plausible";
         $('.' + cardId).text('plausible');
-      } else if (card.quality === "plausible") {
-        card.quality = "genius"
-        $('.' + cardId).text('genius');
       } else {
         card.quality = "genius"
         $('.' + cardId).text('genius');
