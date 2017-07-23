@@ -39,6 +39,14 @@ function removeCardFromStorage() {
   $(this).parents('.idea-card').remove();
 };
 
+
+function upvote(event) {
+  event.preventDefault();
+  var cardId = $(this).closest('.idea-card')[0].id;
+  cardArray.forEach(function(card) {
+    if (card.id == cardId) {
+      upVoteText(cardId);
+
 // This functionality is not working because it doesn't recognize what id is defined as when you split the function even if you have the forEach Loop nested inside both....
 
 // function upvote() {
@@ -81,6 +89,17 @@ function upvote() {
     }
     storeCards();
   })
+};
+
+function upVoteText(cardId) {
+  var card = $('.idea-card').find('span').text();
+  if (card === "swill") {
+    card = "plausible";
+     $('.' + cardId).text('plausible');
+  } else {
+    card = "genius"
+    $('.' + cardId).text('genius');
+  }
 };
 
 function downvote(event) {
