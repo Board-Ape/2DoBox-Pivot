@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="reset.css" type="text/css">
@@ -11,23 +12,39 @@
     <title>Francy and Ben Idea Box</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
+
   <body>
+
     <section class="top-section">
       <header>
-        <h1><span class="idea">idea</span><span class="box">box</span></h1>
+        <h1><span class="idea">2Do</span><span class="box">Box</span></h1>
       </header>
-      <form class="input-fields">
-        <input class="title-input" type="text" placeholder="Title" />
-        <input class="body-input" type="text" placeholder="Body" />
-        <input class="save-btn" type="submit" value="save" disabled />
+      <form aria-label="form" class="input-fields">
+        <label for="Title Input">
+          <input class="title-input" title="Title" type="text" placeholder="Title" />
+        </label>
+        <label for="Body Input">
+          <input class="body-input" title="Body" type="text" placeholder="Body" />
+        </label>
+        <label for="Save Button">
+          <input class="save-btn" title="Save" type="submit" value="save" disabled />
+        </label>
       </form>
     </section>
-    <section class="search-section">
-      <input class="search-input" type="text" placeholder="Search">
+
+    <section aria-label="search bar" class="search-section">
+      <label for="Search Bar">
+        <input class="search-input" title="Search" type="text" placeholder="Search">
+      </label>
     </section>
-    <section class="idea-card-parent">
-      <article class="idea-card">
+
+    <section aria-label="idea card" class="idea-card-parent">
+      <article aria-label="idea" class="idea-card">
       </article>
-    <script type="text/javascript" src="script.js" type="text/js"></script>
+    </section>
+
+    <script type="text/javascript" src="script.js"></script>
+
   </body>
+
 </html>
