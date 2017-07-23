@@ -205,3 +205,38 @@ function retrieveLocalStorage() {
     addCards(card);
   })
 };
+
+
+//AMY WORKING ON SHOW MORE CARDS functionality
+
+//this needs to be called each time we build a card into the array, right? so it checks for >10 each time and hides when needed
+
+function limitCardList(card) {
+  var limitCardArray = [];
+  if(cardArray.length > 10) {
+    var limitCardArray = cardArray.splice(0, cardArray.length - 10);
+  }
+  console.log(limitCardArray);
+  return limitCardArray;
+}
+
+$('.show-more-btn').on('click', showBtn);
+
+function showBtn() {
+  //.show() everything that was hiding
+  toggleBtnText();
+}
+
+
+function toggleBtnText() {
+  var $showBtn = $('.show-more-btn');
+  //if (10 cards are showing)
+  if () {
+    $showBtn.text('Show more...');
+    //if all cards are showing
+  } else {
+    $showBtn.text('Show less...');
+  }
+}
+
+//where do i disable the button if there aren't even 10 cards?
