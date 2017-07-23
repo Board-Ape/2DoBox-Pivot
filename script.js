@@ -14,7 +14,8 @@ function CardElements(title, body) {
   this.title = title;
   this.body = body;
   this.id = Date.now();
-  this.quality = 'swill';
+  this.indexOfImportance = 2;
+  this.importance = ["none", "low", "normal", "high", "critical"];
 };
 
 function storageCheck() {
@@ -39,42 +40,15 @@ function removeCardFromStorage() {
   $(this).parents('.to-do-card').remove();
 };
 
-
-// function upvote() {
-//   var cardId = $(this).closest('.idea-card')[0].id
-//   cardArray.forEach(function(card) {
-//     if (card.id == cardId) {
-//       upvoteConditions();
-//     }
-//     storeCards();
-//   })
-// };
-//
-// function upvoteConditions() {
-//   var cardId = $(this).closest('.idea-card')[0].id
-//   cardArray.forEach(function(card) {
-//     if (card.quality === "swill") {
-//       card.quality = "plausible";
-//       $('.' + cardId).text('plausible');
-//     } else {
-//       card.quality = "genius";
-//       $('.' + cardId).text('genius');
-//    }
-//   })
-// };
-
-
-// Functionality is at 100% with this reduced function
-// The trick will be removing the nested if statement without running into the same problems as above
 function upvote() {
   var cardId = $(this).closest('.to-do-card')[0].id
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
-      if (card.quality === "swill") {
-        card.quality = "plausible";
+      if (card.importance === "swill") {
+        card.importance = "plausible";
         $('.' + cardId).text('plausible');
       } else {
-        card.quality = "genius"
+        card.importance = "genius"
         $('.' + cardId).text('genius');
       }
     }
@@ -82,19 +56,15 @@ function upvote() {
   })
 };
 
-function downvote(event) {
-  event.preventDefault();
+function downvote() {
   var cardId = $(this).closest('.to-do-card')[0].id
   cardArray.forEach(function (card) {
     if (card.id == cardId) {
-      if (card.quality === 'genius') {
-        card.quality = 'plausible';
+      if (card.importance === 'genius') {
+        card.importance = 'plausible';
         $('.' + cardId).text('plausible');
-      } else if (card.quality === 'plausible') {
-        card.quality = 'swill'
-        $('.' + cardId).text('swill');
       } else {
-        card.quality = 'swill'
+        card.importance = 'swill'
         $('.' + cardId).text('swill');
       }
     }
@@ -122,11 +92,12 @@ function editCard() {
 };
 
 function searchCards() {
-  var search = $(this).val().toUpperCase();
+  console.log("searchCards");
+  var search = $(".search-input").val().toUpperCase();
   var results = cardArray.filter(function(elementCard) {
     return elementCard.title.toUpperCase().includes(search) ||
-           elementCard.body.toUpperCase().includes(search) ||
-           elementCard.quality.toUpperCase().includes(search);
+           elementCard.body.toUpperCase().includes(search);
+          //  elementCard.importance.toUpperCase().includes(search);
   });
   $('.to-do-card-parent').empty();
   for (var i = 0; i < results.length; i++) {
@@ -144,7 +115,7 @@ function addCards(buildCard) {
       <div class="ratings">
       <div class="upvote-btn" id="upvote"></div>
       <div class="downvote-btn" id="downvote"></div>
-        <p class="quality">quality: <span class="${buildCard.id}">${buildCard.quality}</span></p>
+        <p class="importance">importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
       </div>
       <hr>
     </article>`);

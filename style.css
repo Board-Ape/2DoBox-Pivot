@@ -140,11 +140,11 @@ p {
   background-image: url(ideabox-assets/delete.svg)
 }
 
-.quality-div {
+/*.quality-div {
   margin: 0 0 .25em .75em
-}
+}*/
 
-.quality {
+.importance {
   color: #6D6E71;
   margin-left: 1.2em;
   display: inline-block;
@@ -154,8 +154,8 @@ p {
 
 .upvote-btn,
 .downvote-btn,
-.quality-div,
-.quality {
+/*.quality-div,*/
+.importance {
   display: inline-block;
 }
 
