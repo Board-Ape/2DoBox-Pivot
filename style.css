@@ -127,9 +127,9 @@ p {
   text-align: left;
 }
 
-.body-text {
-  color: #939598
-  margin: .25em 0 1em 0;
+.detail-text {
+  color: #939598;
+  margin: .25em 0 1.25em 0;
 }
 
 .delete-btn {
@@ -139,10 +139,6 @@ p {
   display: inline-block;
   background-image: url(ideabox-assets/delete.svg)
 }
-
-/*.quality-div {
-  margin: 0 0 .25em .75em
-}*/
 
 .importance {
   color: #6D6E71;
@@ -154,7 +150,6 @@ p {
 
 .upvote-btn,
 .downvote-btn,
-/*.quality-div,*/
 .importance {
   display: inline-block;
 }
@@ -204,6 +199,26 @@ hr {
   margin-top: .75em;
 }
 
+/*SHOW MORE*/
+.show-more-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.show-more-btn {
+  background-color: #f27935;
+  color: #fff;
+  font-size: 115%;
+  border: none;
+  height: 40px;
+  margin: 20px 0 20px 0;
+  font-family: 'Open Sans', sans-serif;
+  width: 150px;
+  outline-color: #f27935;
+}
+
+/*MEDIA QUERIES*/
 @media (max-width: 450px) {
   .detail-input {
     padding-top: 0;
