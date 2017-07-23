@@ -39,7 +39,6 @@ function removeCardFromStorage() {
   $(this).parents('.to-do-card').remove();
 };
 
-// This functionality is not working because it doesn't recognize what id is defined as when you split the function even if you have the forEach Loop nested inside both....
 
 // function upvote() {
 //   var cardId = $(this).closest('.idea-card')[0].id
