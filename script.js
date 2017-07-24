@@ -1,5 +1,3 @@
-var cardArray = [];
-
 $(window).on('load', storageCheck);
 $('.to-do-card-parent').on('click', '#delete', removeCardFromStorage);
 $('.task-input, .detail-input').on('keyup', enableSave);
@@ -21,6 +19,7 @@ function CardElements(title, body) {
 };
 
 function storageCheck() {
+  var cardArray = [];
   retrieveLocalStorage();
   limitCardList();
   clearInputs();
@@ -176,8 +175,8 @@ function taskComplete() {
   var taskID = $(this).closest('.to-do-card')[0].id;
   // var parsedIdea = localStorage.setItem('array', JSON.stringify(cardArray));
   this.completed = true;
-  storeCards();
   $(this).parent().parent().addClass('grayout');
+  storeCards();
 }
 
 function fireCards() {
