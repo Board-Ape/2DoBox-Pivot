@@ -215,7 +215,7 @@ hr {
   align-items: center;
 }
 
-.show-more-btn {
+.show-btn {
   background-color: #f27935;
   color: #fff;
   font-size: 115%;
@@ -225,6 +225,10 @@ hr {
   font-family: 'Open Sans', sans-serif;
   width: 150px;
   outline-color: #f27935;
+}
+
+#show-less {
+  display: none;
 }
 
 /*MEDIA QUERIES*/
