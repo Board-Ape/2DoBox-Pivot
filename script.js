@@ -1,4 +1,4 @@
-var cardArray = []
+var cardArray = [];
 
 $(window).on('load', storageCheck);
 $('.to-do-card-parent').on('click', '#delete', removeCardFromStorage);
@@ -7,7 +7,7 @@ $('.to-do-card-parent').on('click', '#upvote', upvote);
 $('.to-do-card-parent').on('click', '#downvote', downvote);
 $('.save-btn').on('click', saveClick);
 $('.to-do-card-parent').on('blur', 'h2', editCard)
-                      .on('blur', '.detail-text', editCard);
+                       .on('blur', '.detail-text', editCard);
 $('.search-input').on('keyup', searchCards);
 $('.to-do-card-parent').on('click', '.completed-task-btn', taskComplete);
 
@@ -22,7 +22,9 @@ function CardElements(title, body) {
 
 function storageCheck() {
   retrieveLocalStorage();
+  limitCardList();
   clearInputs();
+  //disableShowMore();
 };
 
 function enableSave() {
@@ -169,6 +171,7 @@ function addCards(buildCard) {
       </div>
       <hr>
     </article>`);
+    //disableShowMore();
 };
 
 function taskComplete() {
@@ -186,6 +189,7 @@ function fireCards() {
   addCards(newCard);
   storeCards();
   clearInputs();
+  limitCardList();
 };
 
 function storeCards() {
@@ -205,3 +209,50 @@ function retrieveLocalStorage() {
     addCards(card);
   })
 };
+
+
+//AMY WORKING ON SHOW MORE CARDS functionality
+
+//this needs to be called each time we build a card into the array, right? so it checks for >10 each time and hides when needed
+
+//im not deleting the from the page, but am deleting them from localstorage - opposite of what i want to do!!
+
+function limitCardList(card) {
+  var splicedCards  = [];
+  if(cardArray.length > 10) {
+    splicedCards = cardArray.splice(0, cardArray.length - 10);
+    $('.to-do-card-parent').empty();
+    for (var i = 0; i < cardArray.length; i++) {
+      addCards(cardArray[i]);
+    }
+  }
+  return splicedCards;
+}
+
+$('.show-btn').on('click', showBtn);
+
+function showBtn() {
+  $('.to-do-card-parent').empty();
+  toggleBtnText();
+}
+
+function toggleBtnText() {
+  var $showBtn = $('.show-btn');
+  if ($showBtn.text() === 'Show more...') {
+    $showBtn.text('Show less...');
+    retrieveLocalStorage();
+  } else {
+    $showBtn.text('Show more...');
+    $('.to-do-card-parent').empty();
+    limitCardList();
+  }
+}
+
+//total = < 10, diable show more ... button
+
+function disableShowMore() {
+  if (cardArray.lenght <= 10) {
+    $('.show-btn').attr('disabled', true);
+  }
+}
+//where do i disable the button if there aren't even 10 cards?
