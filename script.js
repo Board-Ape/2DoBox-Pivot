@@ -16,8 +16,7 @@ function CardElements(title, body) {
   this.body = body;
   this.id = Date.now();
   this.completed = false;
-  this.indexOfImportance = 2;
-  this.importance = "Normal";
+  this.importance = 2;
 };
 
 function storageCheck() {
@@ -43,79 +42,36 @@ function removeCardFromStorage() {
 };
 
 function upvote() {
-  var cardId = $(this).closest('.to-do-card')[0].id
+  var cardId = $(this).closest('.to-do-card')[0].id;
+  var importance = ['None', 'Low', 'Normal','High','Critical']
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
-      if (card.importance === "None") {
-        card.importance = "Low";
-        $('.' + cardId).text("Low");
-      } else if (card.importance === "Low") {
-        card.importance = "Normal";
-        $('.' + cardId).text('Normal');
-      } else if (card.importance === "Normal") {
-        card.importance = "High";
-        $('.' + cardId).text("High");
-      } else {
-        card.importance = "Critical";
-        $('.' + cardId).text("Critical");
-      }
+      card.importance++;
+      $('.' + cardId).text(importance[card.importance]);
     }
     storeCards();
   })
 };
 
 function downvote() {
-  var cardId = $(this).closest('.to-do-card')[0].id
+  var cardId = $(this).closest('.to-do-card')[0].id;
+  var importance = ['None', 'Low', 'Normal','High','Critical']
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
-      if (card.importance === "Critical") {
-        card.importance = "High";
-        $('.' + cardId).text("High");
-      } else if (card.importance === "High") {
-        card.importance = "Normal";
-        $('.' + cardId).text('Normal');
-      } else if (card.importance === "Normal") {
-        card.importance = "Low";
-        $('.' + cardId).text("Low");
-      } else {
-        card.importance = "None";
-        $('.' + cardId).text("None");
-      }
+      card.importance--;
+      $('.' + cardId).text(importance[card.importance]);
     }
+    disableUpDownvote();
     storeCards();
   })
 };
+//Upvote/downvote funtionality and refactoring are there, need to create some type of window to not allow the the buttons to push past a certian value. Also the prepend card reloads a number rather than a string next to importance.
 
-// function upvote() {
-//   var cardId = $(this).closest('.to-do-card')[0].id
-//   cardArray.forEach(function(card) {
-//     if (card.id == cardId) {
-//       if (card.importance === "swill") {
-//         card.importance = "plausible";
-//         $('.' + cardId).text('plausible');
-//       } else {
-//         card.importance = "genius"
-//         $('.' + cardId).text('genius');
-//       }
-//     }
-//     storeCards();
-//   })
-// };
-
-// function downvote() {
-//   var cardId = $(this).closest('.to-do-card')[0].id
-//   cardArray.forEach(function (card) {
-//     if (card.id == cardId) {
-//       if (card.importance === 'genius') {
-//         card.importance = 'plausible';
-//         $('.' + cardId).text('plausible');
-//       } else {
-//         card.importance = 'swill'
-//         $('.' + cardId).text('swill');
-//       }
-//     }
-//   storeCards();
-//   })
+// function disableUpDownvote() {
+//   var importance = ['None', 'Low', 'Normal','High','Critical']
+//   if (importance === [0]) {
+//     $(".#upvote-btn").prop('disabled', 'true');
+//   }
 // };
 
 function saveClick(event) {
