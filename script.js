@@ -220,10 +220,11 @@ function limitCardList(card) {
   return limitCardArray;
 }
 
+
 $('.show-more-btn').on('click', showBtn);
 
 function showBtn() {
-  //.show() everything that was hiding
+  //show the whole cardArray everything that was hiding
   toggleBtnText();
 }
 
