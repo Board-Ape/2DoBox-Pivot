@@ -10,7 +10,7 @@ body {
 }
 
 h1 {
-  font-family: 'roboto slab', sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
   font-weight: 700;
   text-align: center;
   font-size: 3em;
@@ -29,7 +29,11 @@ h1 {
 .search-input,
 .task-input,
 .detail-input {
-  border: 4px solid ##d1d3d4;
+  border: 1px solid #d1d3d4;
+  padding: .1em 0 .1em 0;
+  height: 1.2em;
+  font-size: 1.5em;
+  color: #6D6E71;
 }
 
 .task-input,
@@ -39,8 +43,8 @@ h1 {
   width: 66%;
   display: block;
   margin: auto;
-  margin-bottom: 1.75em;
-  height: 3em;
+  margin-bottom: 1em;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .input-fields {
@@ -57,10 +61,12 @@ h1 {
 
 .save-btn {
   background-color: #f27935;
+  border: 1px solid #d1d3d4;
   color: #fff;
   font-size: 1.25em;
   border: none;
-  height: 2.5em;
+  height: 1.6em;
+  margin-bottom: 1.5em;
 }
 
 .save-btn:hover {
@@ -80,24 +86,12 @@ h1 {
   color: #d1d3d4;
   padding-left: .5em;
   padding-top: .75em;
-  font-size: 1.75em;
+  font-size: 0.85em;
 }
 
-::-moz-placeholder { /* Firefox 19+ */
-  color: #d1d3d4;
-  padding-left: .75em;
-  font-size: .5em;
-  padding-top: .75em;
-}
-
-:-ms-input-placeholder { /* IE 10+ */
-  color: #d1d3d4;
-  padding-left: .75em;
-  font-size: .5em;
-  padding-top: .75em;
-}
-
-:-moz-placeholder { /* Firefox 18- */
+::-moz-placeholder,
+:-ms-input-placeholder,
+:-moz-placeholder {
   color: #d1d3d4;
   padding-left: .75em;
   font-size: .5em;
