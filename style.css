@@ -159,10 +159,12 @@ p {
    display: flex;
    align-content: center;
    margin: .25em 0 1em 0;
+   width: 100%;
 }
 
 .completed-task-btn {
-  margin-left: 385px;
+  margin-left: auto;
+  height: 30px;
 }
 
 .grayout {
@@ -174,6 +176,7 @@ p {
 #downvote {
   height: 1.5em;
   width: 1.5em;
+  background-repeat: no-repeat;
 }
 
 #delete:hover {
