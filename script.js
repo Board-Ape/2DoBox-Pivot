@@ -22,7 +22,6 @@ function storageCheck() {
   retrieveLocalStorage();
   limitCardList();
   clearInputs();
-  //disableShowMore();
 };
 
 function enableSave() {
@@ -112,18 +111,19 @@ function addCards(buildCard) {
   $('.to-do-card-parent').prepend(
     `<article class="to-do-card" id="${buildCard.id}">
       <h2 contenteditable="true">${buildCard.title}</h2>
-      <div class="delete-btn" id="delete"></div>
+      <aside class="complete-delete-container">
+        <div class="completed-task-btn"></div>
+        <div class="delete-btn" id="delete"></div>
+      </aside>
         <p class="detail-text" contenteditable="true">${buildCard.body}</p>
       </div>
       <div class="ratings">
         <div class="upvote-btn" id="upvote"></div>
         <div class="downvote-btn" id="downvote"></div>
         <p class="importance">importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
-        <button class="completed-task-btn">Completed Task</button>
       </div>
       <hr>
     </article>`);
-    //disableShowMore();
 };
 
 function taskComplete() {
@@ -162,13 +162,6 @@ function retrieveLocalStorage() {
   })
 };
 
-
-//AMY WORKING ON SHOW MORE CARDS functionality
-
-//this needs to be called each time we build a card into the array, right? so it checks for >10 each time and hides when needed
-
-//im not deleting the from the page, but am deleting them from localstorage - opposite of what i want to do!!
-
 function limitCardList(card) {
   var splicedCards  = [];
   if(cardArray.length > 10) {
@@ -200,11 +193,8 @@ function toggleBtnText() {
   }
 }
 
-//total = < 10, diable show more ... button
-
 function disableShowMore() {
   if (cardArray.lenght <= 10) {
     $('.show-btn').attr('disabled', true);
   }
 }
-//where do i disable the button if there aren't even 10 cards?

@@ -158,7 +158,27 @@ p {
 
 .completed-task-btn {
   margin-left: auto;
-  height: 30px;
+  height: 1.33em;
+  width: 1.33em;
+  background-image: url(ideabox-assets/success.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-right: 0.75em;
+  margin-top: 0.075em;
+}
+
+.completed-task-btn:hover {
+  background-image: url(ideabox-assets/success-hover.svg);
+}
+
+.complete-delete-container {
+  width: 4em;
+  float: right;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: .25em 0 1em 0;
+
 }
 
 .grayout {
