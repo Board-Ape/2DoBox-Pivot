@@ -8,13 +8,15 @@ $('.to-do-card-parent').on('blur', 'h2', editCard)
                        .on('blur', '.detail-text', editCard);
 $('.search-input').on('keyup', searchCards);
 $('.to-do-card-parent').on('click', '.completed-task-btn', taskComplete);
+$('.show-btn').on('click', showBtn);
+$('.filter-importance').on('change', filterImportance);
 
 function CardElements(title, body) {
   this.title = title;
   this.body = body;
   this.id = Date.now();
   this.completed = false;
-  this.importance = 2;
+  this.importance = 'normal';
 };
 
 function storageCheck() {
@@ -41,54 +43,37 @@ function removeCardFromStorage() {
   $(this).parents('.to-do-card').remove();
 };
 
-// function checkImportanceLevel() {
-//   var cardId = $(this).closest('.to-do-card')[0].id;
-//   var importance = ['None', 'Low', 'Normal','High','Critical']
-//   cardArray.forEach(function(card) {
-//     if (card.id == cardId); {
-//     $('.' + cardId).text(importance[card.importance]);
-//   };
-//  })
-// };
-
 function upvote() {
   var cardId = $(this).closest('.to-do-card')[0].id;
-  console.log("upvote var cardID",$(this).closest('.to-do-card')[0]);
-  var importance = ['None', 'Low', 'Normal','High','Critical']
-  console.log("card array", cardArray);
+  var importance = ['none', 'low', 'normal','high','critical']
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
-    card.importance++;
-      $('.' + cardId).text(importance[card.importance]);
+    var currentIndex = importance.indexOf(card.importance);
+    currentIndex = (currentIndex !== 4) ? currentIndex + 1 : currentIndex;
+    //ternary on line above does same thing as IF statment below
+    // if (currentIndex !== 4) {
+    //     currentIndex++;
+    //   }
+    card.importance = importance[currentIndex];
+      $('.' + cardId).text(card.importance);
     }
     storeCards();
-    // checkImportanceLevel();
   })
 };
 
 function downvote() {
   var cardId = $(this).closest('.to-do-card')[0].id;
-  var importance = ['None', 'Low', 'Normal','High','Critical']
+  var importance = ['none', 'low', 'normal','high','critical'];
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
-      card.importance--;
-      $('.' + cardId).text(importance[card.importance]);
-    }
-    // disableUpDownvote();
-    storeCards();
-  })
-};
-
-
-// function disableUpDownvote() {
-//   var cardId = $(this).closest('.to-do-card')[0].id;
-//   var importanceLevel = $(this).closest('.to-do-card')[0].find('.' + cardId)
-//   console.log("var", importanceLevel);
-  // var importance = ['None', 'Low', 'Normal','High','Critical']
-  // if (importance === [0]) {
-  //   $(".#upvote-btn").css('display', 'none');
-  // }
-// };
+      var currentIndex = importance.indexOf(card.importance);
+      currentIndex = (currentIndex !== 0) ? currentIndex - 1 : currentIndex;
+      card.importance = importance[currentIndex];
+      $('.' + cardId).text(card.importance);
+      }
+      storeCards();
+    })
+  };
 
 function saveClick(event) {
   event.preventDefault();
@@ -115,9 +100,11 @@ function searchCards() {
   var results = cardArray.filter(function(elementCard) {
     return elementCard.title.toUpperCase().includes(search) ||
            elementCard.body.toUpperCase().includes(search);
-          //  elementCard.importance.toUpperCase().includes(search);
+           //elementCard.importance.toUpperCase().includes(search);
   });
+  //this is used more than once - write as a seperate function and call in both places - parament would be results array
   $('.to-do-card-parent').empty();
+  //change this to use forEach
   for (var i = 0; i < results.length; i++) {
     addCards(results[i]);
   }
@@ -144,7 +131,6 @@ function addCards(buildCard) {
 function taskComplete() {
   console.log("it works")
   var taskID = $(this).closest('.to-do-card')[0].id;
-  // var parsedIdea = localStorage.setItem('array', JSON.stringify(cardArray));
   this.completed = true;
   $(this).parent().parent().addClass('grayout');
   storeCards();
@@ -189,8 +175,6 @@ function limitCardList(card) {
   return splicedCards;
 }
 
-$('.show-btn').on('click', showBtn);
-
 function showBtn() {
   $('.to-do-card-parent').empty();
   toggleBtnText();
@@ -213,3 +197,26 @@ function disableShowMore() {
     $('.show-btn').attr('disabled', true);
   }
 }
+
+function filterImportance(event) {
+  var selectedImportance = event.target.value;
+  var results;
+  if (selectedImportance === 'all') {
+    results = cardArray.slice();
+  } else {
+  results = cardArray.filter(function(elementCard) {
+    return elementCard.importance === selectedImportance;
+    });
+  }
+  $('.to-do-card-parent').empty();
+  //change this to use forEach
+  for (var i = 0; i < results.length; i++) {
+    addCards(results[i]);
+  //check all cards to see if they match this value
+  //empty out container, refill it with those who do match
+  //addCards(card)
+}
+}
+
+//CHECK IF they have selected ALL
+//if they have , return ALL cards.
