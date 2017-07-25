@@ -43,15 +43,28 @@ function removeCardFromStorage() {
   $(this).parents('.to-do-card').remove();
 };
 
+// function checkImportanceLevel() {
+//   var cardId = $(this).closest('.to-do-card')[0].id;
+//   var importance = ['None', 'Low', 'Normal','High','Critical']
+//   cardArray.forEach(function(card) {
+//     if (card.id == cardId); {
+//     $('.' + cardId).text(importance[card.importance]);
+//   };
+//  })
+// };
+
 function upvote() {
   var cardId = $(this).closest('.to-do-card')[0].id;
+  console.log("upvote var cardID",$(this).closest('.to-do-card')[0]);
   var importance = ['None', 'Low', 'Normal','High','Critical']
+  console.log("card array", cardArray);
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
-      card.importance++;
+    card.importance++;
       $('.' + cardId).text(importance[card.importance]);
     }
     storeCards();
+    // checkImportanceLevel();
   })
 };
 
@@ -63,17 +76,20 @@ function downvote() {
       card.importance--;
       $('.' + cardId).text(importance[card.importance]);
     }
-    disableUpDownvote();
+    // disableUpDownvote();
     storeCards();
   })
 };
-//Upvote/downvote funtionality and refactoring are there, need to create some type of window to not allow the the buttons to push past a certian value. Also the prepend card reloads a number rather than a string next to importance.
+
 
 // function disableUpDownvote() {
-//   var importance = ['None', 'Low', 'Normal','High','Critical']
-//   if (importance === [0]) {
-//     $(".#upvote-btn").prop('disabled', 'true');
-//   }
+//   var cardId = $(this).closest('.to-do-card')[0].id;
+//   var importanceLevel = $(this).closest('.to-do-card')[0].find('.' + cardId)
+//   console.log("var", importanceLevel);
+  // var importance = ['None', 'Low', 'Normal','High','Critical']
+  // if (importance === [0]) {
+  //   $(".#upvote-btn").css('display', 'none');
+  // }
 // };
 
 function saveClick(event) {
@@ -119,7 +135,7 @@ function addCards(buildCard) {
       <div class="ratings">
         <div class="upvote-btn" id="upvote"></div>
         <div class="downvote-btn" id="downvote"></div>
-        <p class="importance">importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
+        <p class="importance">Importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
         <button class="completed-task-btn">Completed Task</button>
       </div>
       <hr>
