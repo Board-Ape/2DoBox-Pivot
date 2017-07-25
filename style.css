@@ -38,13 +38,37 @@ h1 {
 
 .task-input,
 .detail-input,
-.save-btn,
-.search-input {
+.save-btn {
   width: 66%;
   display: block;
   margin: auto;
   margin-bottom: 1em;
   font-family: 'Open Sans', sans-serif;
+}
+
+.filter-importance {
+  border: 1px solid #d1d3d4;
+  padding: .1em 0 .1em 0;
+  height: 1.2em;
+  font-size: 1.5em;
+  color: #6D6E71;
+  width: 15em;
+}
+
+.search-input {
+  width: 15em;
+  display: block;
+  margin: auto;
+  margin-bottom: 1em;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.search-section {
+  border: 1px solid orange;
+  width: 66%;
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
 }
 
 .input-fields {
@@ -75,6 +99,11 @@ h1 {
 
 .save-btn:disabled {
   background-color: #D1D3D4;
+}
+
+.center-search {
+  display: flex;
+  justify-content: center;
 }
 
 .search-section {
