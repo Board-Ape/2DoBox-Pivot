@@ -1,5 +1,3 @@
-var cardArray = [];
-
 $(window).on('load', storageCheck);
 $('.to-do-card-parent').on('click', '#delete', removeCardFromStorage);
 $('.task-input, .detail-input').on('keyup', enableSave);
@@ -20,10 +18,10 @@ function CardElements(title, body) {
 };
 
 function storageCheck() {
+  var cardArray = [];
   retrieveLocalStorage();
   limitCardList();
   clearInputs();
-  //disableShowMore();
 };
 
 function enableSave() {
@@ -129,7 +127,10 @@ function addCards(buildCard) {
   $('.to-do-card-parent').prepend(
     `<article class="to-do-card" id="${buildCard.id}">
       <h2 contenteditable="true">${buildCard.title}</h2>
-      <div class="delete-btn" id="delete"></div>
+      <aside class="complete-delete-container">
+        <div class="completed-task-btn"></div>
+        <div class="delete-btn" id="delete"></div>
+      </aside>
         <p class="detail-text" contenteditable="true">${buildCard.body}</p>
       </div>
       <div class="ratings">
@@ -137,10 +138,10 @@ function addCards(buildCard) {
         <div class="downvote-btn" id="downvote"></div>
         <p class="importance">Importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
         <button class="completed-task-btn">Completed Task</button>
+        <p class="importance">importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
       </div>
       <hr>
     </article>`);
-    //disableShowMore();
 };
 
 function taskComplete() {
@@ -148,8 +149,8 @@ function taskComplete() {
   var taskID = $(this).closest('.to-do-card')[0].id;
   // var parsedIdea = localStorage.setItem('array', JSON.stringify(cardArray));
   this.completed = true;
-  storeCards();
   $(this).parent().parent().addClass('grayout');
+  storeCards();
 }
 
 function fireCards() {
@@ -178,13 +179,6 @@ function retrieveLocalStorage() {
     addCards(card);
   })
 };
-
-
-//AMY WORKING ON SHOW MORE CARDS functionality
-
-//this needs to be called each time we build a card into the array, right? so it checks for >10 each time and hides when needed
-
-//im not deleting the from the page, but am deleting them from localstorage - opposite of what i want to do!!
 
 function limitCardList(card) {
   var splicedCards  = [];
@@ -217,11 +211,8 @@ function toggleBtnText() {
   }
 }
 
-//total = < 10, diable show more ... button
-
 function disableShowMore() {
   if (cardArray.lenght <= 10) {
     $('.show-btn').attr('disabled', true);
   }
 }
-//where do i disable the button if there aren't even 10 cards?
