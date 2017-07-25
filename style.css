@@ -30,7 +30,7 @@ h1 {
 .task-input,
 .detail-input {
   border: 1px solid #d1d3d4;
-  padding: .1em 0 .1em .5em;
+  padding: .1em 0 .1em 0;
   height: 1.2em;
   font-size: 1.5em;
   color: #6D6E71;
@@ -84,6 +84,7 @@ h1 {
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #d1d3d4;
+  padding-left: .5em;
   padding-top: .75em;
   font-size: 0.85em;
 }
@@ -176,8 +177,7 @@ p {
   display: flex;
   align-content: center;
   justify-content: center;
-  margin: .25em 0 1em 0;
-
+  margin: .25em 0 1em 0;o
 }
 
 .grayout {

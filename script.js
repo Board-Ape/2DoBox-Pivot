@@ -137,10 +137,7 @@ function addCards(buildCard) {
         <div class="upvote-btn" id="upvote"></div>
         <div class="downvote-btn" id="downvote"></div>
         <p class="importance">Importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
-        <button class="completed-task-btn">Completed Task</button>
-        <p class="importance">importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
-      </div>
-      <hr>
+
     </article>`);
 };
 
