@@ -4,8 +4,8 @@ $('.task-input, .detail-input').on('keyup', enableSave);
 $('.to-do-card-parent').on('click', '#upvote', upvote);
 $('.to-do-card-parent').on('click', '#downvote', downvote);
 $('.save-btn').on('click', saveClick);
-$('.to-do-card-parent').on('blur', 'h2', editCard)
-                       .on('blur', '.detail-text', editCard);
+$('.to-do-card-parent').on('blur', 'h2', editCardTask)
+                       .on('blur', '.detail-text', editCardDetail);
 $('.search-input').on('keyup', searchCards);
 $('.to-do-card-parent').on('click', '.completed-task-btn', taskComplete);
 $('.show-btn').on('click', showBtn);
@@ -110,18 +110,36 @@ function downvote() {
     })
   };
 
-function editCard() {
+function saveClick(event) {
+  event.preventDefault();
+  fireCards();
+  $('.save-btn').attr('disabled', 'disabled');
+};
+
+function editCardTask() {
+  console.log(this);
   var id = $(this).closest('.to-do-card')[0].id;
-  var title = $('h2').text();
-  var body = $('.detail-text').text();
+  var title = $(this).text();
   cardArray.forEach(function(card) {
     if (card.id == id) {
       card.title = title;
+    }
+  })
+  storeCards();
+};
+
+function editCardDetail() {
+  console.log(this);
+  var id = $(this).closest('.to-do-card')[0].id;
+  var body = $(this).text();
+  cardArray.forEach(function(card) {
+    if (card.id == id) {
       card.body = body;
     }
   })
   storeCards();
 };
+
 
 function searchCards() {
   console.log("searchCards");
@@ -171,6 +189,35 @@ function taskComplete() {
   storeCards();
 }
 
+// We now need the class to persist!
+// Loop through the array similar to the upvote/donwvote, look for a matching card in localStorage
+// Once you have that card you can change the object .thatCompleted
+// Put back into localStorage
+
+function fireCards() {
+  var newCard = new CardElements($('.task-input').val(), $('.detail-input').val());
+  cardArray.push(newCard);
+  addCards(newCard);
+  storeCards();
+  clearInputs();
+  limitCardList();
+};
+
+function storeCards() {
+  localStorage.setItem('array', JSON.stringify(cardArray));
+};
+
+function clearInputs() {
+  $('.task-input').val('');
+  $('.detail-input').val('');
+  $('.task-input').focus();
+};
+
+function retrieveLocalStorage() {
+  cardArray = JSON.parse(localStorage.getItem('array')) || [];
+  cardArray.forEach(function(card) {
+    addCards(card);
+=======
 function removeCardFromStorage() {
   var currentCardId = $(this).closest('.to-do-card')[0].id
   cardArray.forEach(function(card, index) {
