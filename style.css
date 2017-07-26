@@ -49,10 +49,10 @@ h1 {
 .filter-importance {
   border: 1px solid #d1d3d4;
   padding: .1em 0 .1em 0;
-  height: 1.2em;
-  font-size: 1.5em;
+  height: 2em;
+  font-size: 1.2em;
   color: #6D6E71;
-  width: 15em;
+  width: 11.5em;
 }
 
 .search-input {
@@ -64,8 +64,7 @@ h1 {
 }
 
 .search-section {
-  border: 1px solid orange;
-  width: 66%;
+  width: 66%%;
   display: flex;
   justify-content: center;
   justify-content: space-between;
@@ -277,6 +276,23 @@ hr {
 }
 
 /*MEDIA QUERIES*/
+@media (max-width: 900px){
+
+  .center-search {
+    display: flex;
+  }
+
+  .search-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    margin: auto;
+  }
+
+}
+
 @media (max-width: 450px) {
   .detail-input {
     padding-top: 0;
@@ -289,5 +305,9 @@ hr {
   .search-input {
     width: 80%;
     margin-left: auto;
+  }
+
+  .to-do-card {
+    width: 80%;
   }
 }
