@@ -100,15 +100,16 @@ function searchCards() {
   var results = cardArray.filter(function(elementCard) {
     return elementCard.title.toUpperCase().includes(search) ||
            elementCard.body.toUpperCase().includes(search);
-           //elementCard.importance.toUpperCase().includes(search);
   });
-  //this is used more than once - write as a seperate function and call in both places - parament would be results array
-  $('.to-do-card-parent').empty();
-  //change this to use forEach
-  for (var i = 0; i < results.length; i++) {
-    addCards(results[i]);
-  }
+  addCardsBack(results);
 };
+
+function addCardsBack(results) {
+  $('.to-do-card-parent').empty();
+  results.forEach(function(card) {
+    addCards(card);
+  });
+}
 
 function addCards(buildCard) {
   $('.to-do-card-parent').prepend(
@@ -204,7 +205,7 @@ function toggleBtnText() {
 }
 
 function disableShowMore() {
-  if (cardArray.lenght <= 10) {
+  if (cardArray.length <= 10) {
     $('.show-btn').attr('disabled', true);
   }
 }
@@ -219,15 +220,5 @@ function filterImportance(event) {
     return elementCard.importance === selectedImportance;
     });
   }
-  $('.to-do-card-parent').empty();
-  //change this to use forEach
-  for (var i = 0; i < results.length; i++) {
-    addCards(results[i]);
-  //check all cards to see if they match this value
-  //empty out container, refill it with those who do match
-  //addCards(card)
+    addCardsBack(results);
 }
-}
-
-//CHECK IF they have selected ALL
-//if they have , return ALL cards.
