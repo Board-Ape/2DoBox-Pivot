@@ -130,11 +130,22 @@ function addCards(buildCard) {
 
 function taskComplete() {
   console.log("it works")
-  var taskID = $(this).closest('.to-do-card')[0].id;
-  this.completed = true;
+  var cardId = $(this).closest('.to-do-card')[0].id;
+  console.log(this);
+  cardArray.forEach(function(card) {
+  if (card.id == cardId) {
+    console.log("task complete", card);
+    card.completed = true;
+    }
+});
   $(this).parent().parent().addClass('grayout');
   storeCards();
 }
+
+// We now need the class to persist!
+// Loop through the array similar to the upvote/donwvote, look for a matching card in localStorage
+// Once you have that card you can change the object .thatCompleted
+// Put back into localStorage
 
 function fireCards() {
   var newCard = new CardElements($('.task-input').val(), $('.detail-input').val());
