@@ -165,7 +165,6 @@ function storeCards() {
 function clearInputs() {
   $('.task-input').val('');
   $('.detail-input').val('');
-  $('.task-input').focus();
 };
 
 function retrieveLocalStorage() {
