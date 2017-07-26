@@ -19,28 +19,67 @@ function CardElements(title, body) {
   this.importance = 'normal';
 };
 
-function storageCheck() {
-  var cardArray = [];
-  retrieveLocalStorage();
-  limitCardList();
-  clearInputs();
-};
-
 function enableSave() {
   if (($('.task-input').val() !== "") || ($('.detail-input').val() !== "")) {
     $('.save-btn').removeAttr('disabled');
   }
 };
 
-function removeCardFromStorage() {
-  var currentCardId = $(this).closest('.to-do-card')[0].id
-  cardArray.forEach(function(card, index) {
-    if (currentCardId == card.id) {
-      cardArray.splice(index, 1);
-    }
-  })
+function saveClick(event) {
+  event.preventDefault();
+  fireCards();
+  $('.save-btn').attr('disabled', 'disabled');
+};
+
+function addCards(buildCard) {
+  $('.to-do-card-parent').prepend(
+    `<article class="to-do-card" id="${buildCard.id}">
+      <h2 contenteditable="true">${buildCard.title}</h2>
+      <aside class="complete-delete-container">
+        <div class="completed-task-btn"></div>
+        <div class="delete-btn" id="delete"></div>
+      </aside>
+        <p class="detail-text" contenteditable="true">${buildCard.body}</p>
+      </div>
+      <div class="ratings">
+        <div class="upvote-btn" id="upvote"></div>
+        <div class="downvote-btn" id="downvote"></div>
+        <p class="importance">Importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
+
+    </article>`);
+};
+
+function fireCards() {
+  var newCard = new CardElements($('.task-input').val(), $('.detail-input').val());
+  cardArray.push(newCard)
+  addCards(newCard);
   storeCards();
-  $(this).parents('.to-do-card').remove();
+  clearInputs();
+  limitCardList();
+};
+
+function storeCards() {
+  localStorage.setItem('array', JSON.stringify(cardArray));
+  clearInputs()
+};
+
+function retrieveLocalStorage() {
+  cardArray = JSON.parse(localStorage.getItem('array')) || [];
+  cardArray.forEach(function(card) {
+    addCards(card);
+  })
+};
+
+function clearInputs() {
+  $('.task-input').val('');
+  $('.detail-input').val('');
+};
+
+function storageCheck() {
+  var cardArray = [];
+  retrieveLocalStorage();
+  limitCardList();
+  clearInputs();
 };
 
 function upvote() {
@@ -50,10 +89,6 @@ function upvote() {
     if (card.id == cardId) {
     var currentIndex = importance.indexOf(card.importance);
     currentIndex = (currentIndex !== 4) ? currentIndex + 1 : currentIndex;
-    //ternary on line above does same thing as IF statment below
-    // if (currentIndex !== 4) {
-    //     currentIndex++;
-    //   }
     card.importance = importance[currentIndex];
       $('.' + cardId).text(card.importance);
     }
@@ -116,6 +151,19 @@ function searchCards() {
   addCardsBack(results);
 };
 
+function filterImportance(event) {
+  var selectedImportance = event.target.value;
+  var results;
+  if (selectedImportance === 'all') {
+    results = cardArray.slice();
+  } else {
+  results = cardArray.filter(function(elementCard) {
+    return elementCard.importance === selectedImportance;
+    });
+  }
+    addCardsBack(results);
+}
+
 function addCardsBack(results) {
   $('.to-do-card-parent').empty();
   results.forEach(function(card) {
@@ -123,24 +171,10 @@ function addCardsBack(results) {
   });
 }
 
-function addCards(buildCard) {
-  $('.to-do-card-parent').prepend(
-    `<article class="to-do-card" id="${buildCard.id}">
-      <h2 contenteditable="true">${buildCard.title}</h2>
-      <aside class="complete-delete-container">
-        <div class="completed-task-btn"></div>
-        <div class="delete-btn" id="delete"></div>
-      </aside>
-        <p class="detail-text" contenteditable="true">${buildCard.body}</p>
-      </div>
-      <div class="ratings">
-        <div class="upvote-btn" id="upvote"></div>
-        <div class="downvote-btn" id="downvote"></div>
-        <p class="importance">Importance: <span class="${buildCard.id}">${buildCard.importance}</span></p>
-
-    </article>`);
-};
-
+// We now need the class to persist!
+// Loop through the array similar to the upvote/donwvote, look for a matching card in localStorage
+// Once you have that card you can change the object .thatCompleted
+// Put back into localStorage
 function taskComplete() {
   console.log("it works")
   var cardId = $(this).closest('.to-do-card')[0].id;
@@ -150,7 +184,7 @@ function taskComplete() {
     console.log("task complete", card);
     card.completed = true;
     }
-});
+  });
   $(this).parent().parent().addClass('grayout');
   storeCards();
 }
@@ -183,9 +217,19 @@ function retrieveLocalStorage() {
   cardArray = JSON.parse(localStorage.getItem('array')) || [];
   cardArray.forEach(function(card) {
     addCards(card);
+=======
+function removeCardFromStorage() {
+  var currentCardId = $(this).closest('.to-do-card')[0].id
+  cardArray.forEach(function(card, index) {
+    if (currentCardId == card.id) {
+      cardArray.splice(index, 1);
+    }
   })
+  storeCards();
+  $(this).parents('.to-do-card').remove();
 };
 
+//SHOW MORE/LESS FUNCTIONALITY
 function limitCardList(card) {
   var splicedCards  = [];
   if(cardArray.length > 10) {
@@ -219,17 +263,4 @@ function disableShowMore() {
   if (cardArray.length <= 10) {
     $('.show-btn').attr('disabled', true);
   }
-}
-
-function filterImportance(event) {
-  var selectedImportance = event.target.value;
-  var results;
-  if (selectedImportance === 'all') {
-    results = cardArray.slice();
-  } else {
-  results = cardArray.filter(function(elementCard) {
-    return elementCard.importance === selectedImportance;
-    });
-  }
-    addCardsBack(results);
 }
