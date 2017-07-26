@@ -194,7 +194,7 @@ function toggleBtnText() {
 }
 
 function disableShowMore() {
-  if (cardArray.lenght <= 10) {
+  if (cardArray.length <= 10) {
     $('.show-btn').attr('disabled', true);
   }
 }
