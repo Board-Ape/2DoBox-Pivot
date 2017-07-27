@@ -170,7 +170,6 @@ function removeCardFromStorage() {
 };
 
 function taskComplete() {
-  console.log("it works")
   var cardId = $(this).closest('.to-do-card')[0].id;
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
@@ -197,7 +196,8 @@ function toggleBtnText() {
     cardArray.forEach(function(card) {
       addCards(card);
     });
-  } else { $showBtn.text('Show more...');
+  } else {
+    $showBtn.text('Show more...');
     $('.to-do-card-parent').empty();
     retrieveLocalStorage();
     limitCardList();
@@ -221,7 +221,6 @@ function limitCardList(card) {
     for (var i = 0; i < cardArray.length; i++) {
       addCards(cardArray[i]);
     };
-
   return splicedCards;
   };
 };
