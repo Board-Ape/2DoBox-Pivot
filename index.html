@@ -1,71 +1,61 @@
-  <!DOCTYPE html>
-  <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="reset.css" type="text/css">
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
-    <title>Francy and Ben Idea Box</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="reset.css" type="text/css">
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
+  <title>Francy and Ben Idea Box</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-  <body>
-
-    <section class="top-section">
-      <header>
-        <h1><span class="to-do">2Do</span><span class="box">Box</span></h1>
-      </header>
-      <form aria-label="form" class="input-fields">
-        <label for="Task Input">
-          <input class="task-input" title="Task" type="text" placeholder="Task" />
-        </label>
-        <label for="Detail Input">
-          <input class="detail-input" title="Detail" type="text" placeholder="Detail" />
-        </label>
-        <label for="Save Button">
-          <input class="save-btn" title="Save" type="submit" value="save" disabled />
-        </label>
-      </form>
-    </section>
-
-<article class="bottom-section">
-
-    <div class="center-search">
-    <section aria-label="search bar" class="search-section">
-
-      <label for="Search Bar">
-        <input class="search-input" title="Search" type="text" placeholder="Search">
+<body>
+  <section class="top-section">
+    <header>
+      <h1><span role="h1" class="to-do">2Do</span><span role="h1" class="box">Box</span></h1>
+    </header>
+    <form aria-label="form" class="input-fields">
+      <label for="task-input">
+        <input class="task-input" id="task-input" title="Task" type="text" placeholder="Task" />
       </label>
-
-      <label for="Filter Importance">
-        <select class="filter-importance">
-          <option selected value="all">All importance levels</option>
-          <option value="none">none</option>
-          <option value="low">low</option>
-          <option value="normal">normal</option>
-          <option value="high">high</option>
-          <option value="critical">critical</option>
-        </select>
+      <label for="detail-input">
+        <input class="detail-input" id="detail-input" title="Detail" type="text" placeholder="Detail" />
       </label>
-
-    </section>
-  </div>
-
-    <section aria-label="to do card" class="to-do-card-parent">
+      <label for="save-btn">
+        <input class="save-btn" id="save-btn" title="Save" type="submit" value="save" disabled />
+      </label>
+    </form>
+  </section>
+  <article class="bottom-section">
+    <div role="center search" class="center-search">
+      <section class="search-section">
+        <label for="search-input">
+          <input class="search-input" id="search-input" title="Search" type="text" placeholder="Search">
+        </label>
+        <label for="filter-importance" >
+          <select class="filter-importance" id="filter-importance">
+            <option selected value="all">All importance levels</option>
+            <option value="none">none</option>
+            <option value="low">low</option>
+            <option value="normal">normal</option>
+            <option value="high">high</option>
+            <option value="critical">critical</option>
+          </select>
+        </label>
+      </section>
+    </div>
+    <section class="to-do-card-parent">
       <article aria-label="idea" class="to-do-card">
       </article>
     </section>
-
     <section class="show-more-section">
       <button id="show-more" class="show-btn" type="button" name="button">Show more...</button>
     </section>
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
-
-</article>
-  </body>
+  </article>
+</body>
 
 </html>
