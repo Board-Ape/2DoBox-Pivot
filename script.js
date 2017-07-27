@@ -194,9 +194,12 @@ function toggleBtnText() {
   var $showBtn = $('.show-btn');
   if ($showBtn.text() === 'Show more...') {
     $showBtn.text('Show less...');
-    retrieveLocalStorage();
+    cardArray.forEach(function(card) {
+      addCards(card);
+    });
   } else { $showBtn.text('Show more...');
     $('.to-do-card-parent').empty();
+    retrieveLocalStorage();
     limitCardList();
   };
 };
@@ -204,7 +207,9 @@ function toggleBtnText() {
 function retrieveLocalStorage() {
   cardArray = JSON.parse(localStorage.getItem('array')) || [];
   cardArray.forEach(function(card) {
-    addCards(card);
+    if (card.completed === false) {
+      addCards(card);
+    }
   });
 };
 
@@ -216,12 +221,7 @@ function limitCardList(card) {
     for (var i = 0; i < cardArray.length; i++) {
       addCards(cardArray[i]);
     };
-  };
-  return splicedCards;
-};
 
-function disableShowMore() {
-  if (cardArray.length >= 10) {
-    $('.show-btn').attr('disabled', true);
+  return splicedCards;
   };
 };
