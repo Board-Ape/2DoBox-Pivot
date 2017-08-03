@@ -11,6 +11,8 @@ $('.to-do-card-parent').on('click', '#upvote', upvote)
                        .on('click', '.completed-task-btn', taskComplete);
 $('.show-btn').on('click', showBtn);
 
+//What is going on?
+
 function storageCheck() {
   var cardArray = [];
   retrieveLocalStorage();
